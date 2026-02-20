@@ -21,8 +21,16 @@ export const createProduct = async (req: Request, res: Response) => {
       isActive,
     } = req.body;
 
-    if (!name || !description || !price || !category) {
-      return res.status(400).json({ error: "Missing required fields" });
+    const missingFields = [];
+    if (!name) missingFields.push("name");
+    if (!description) missingFields.push("description");
+    if (!price) missingFields.push("price");
+    if (!category) missingFields.push("category");
+
+    if (missingFields.length > 0) {
+      return res.status(400).json({
+        error: `Missing required field${missingFields.length > 1 ? "s" : ""}: ${missingFields.join(", ")}`,
+      });
     }
 
     const priceNum = Number(price);

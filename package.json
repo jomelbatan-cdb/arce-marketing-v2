@@ -15,7 +15,10 @@
     "@types/cors": "^2.8.19"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.11.1",
+    "bcrypt": "^6.0.0",
     "framer-motion": "^12.23.25",
-    "lucide-react": "^0.555.0"
+    "lucide-react": "^0.555.0",
+    "next-auth": "^4.24.13"
   }
 }

@@ -11,6 +11,7 @@ import { connectDB } from "./config/db";
 import { ENV } from "./config/env";
 
 import { createServer } from "http";
+import { pingAPI } from "./services/scheduled.jobs";
 
 const PORT = ENV.PORT;
 
@@ -22,9 +23,12 @@ app.use("/api/auth", AuthRouter);
 app.use("/api/product", ProductRouter);
 app.use("/api/category", CategoryRouter);
 app.use("/api/variation", VariationRouter);
+app.get("/health", (_, res) => res.status(200).send("OK"));
 
 // ✅ Create HTTP server
 const server = createServer(app);
+
+pingAPI();
 
 // ✅ Start server
 server.listen(PORT, () => {
